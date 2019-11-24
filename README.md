@@ -21,7 +21,7 @@ Or install it yourself as:
 ## Usage
 
 Open you're terminal and just run autogen_sindb to auto-generate a Sinatra and Database file structure. 
-*MAKE SURE YOU ARE IN THE DIRECTORY THAT YOU WANT TO BE IN WHEn YOU RUN THIS FILE GENERATOR*
+*MAKE SURE YOU ARE IN THE DIRECTORY THAT YOU WANT TO BE IN WHEN YOU RUN THIS FILE GENERATOR*
 
 ## Development
 
