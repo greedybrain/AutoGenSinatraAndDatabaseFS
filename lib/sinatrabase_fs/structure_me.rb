@@ -47,15 +47,7 @@ class SinatrabaseFs::StructureMe
 
     def write_to_app_views_erb_file_erb
         FileUtils.cd(Dir.pwd) do |dir|
-            file = File.open("app/views/erb_file.rb", 'w')
-            file.puts "#WRITE YOUR TEMPLATE HERE"
-            file.close
-        end
-    end
-
-    def write_to_app_views_erb_file_erb
-        FileUtils.cd(Dir.pwd) do |dir|
-            file = File.open("app/views/erb_file.rb", 'w')
+            file = File.open("app/views/erb_file.erb", 'w')
             file.puts "#WRITE YOUR TEMPLATE HERE"
             file.close
         end
