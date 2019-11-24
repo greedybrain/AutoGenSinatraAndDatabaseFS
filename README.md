@@ -9,7 +9,7 @@ TODO: Delete this and the text above, and describe your gem
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'sinatrabase_fs'
+gem 'autogen_sindb'
 ```
 
 And then execute:
@@ -18,11 +18,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install sinatrabase_fs
+    $ gem install autogen_sindb
 
 ## Usage
 
-TODO: Write usage instructions here
+Open you're terminal and just run autogen_sindb to auto-generate a Sinatra and Database file structure
 
 ## Development
 
