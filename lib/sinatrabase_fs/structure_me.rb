@@ -13,13 +13,7 @@ class SinatrabaseFs::StructureMe
     end
 
     def make_dirs 
-<<<<<<< HEAD
-        curr_dir = Dir.pwd
-
-        FileUtils.cd(curr_dir) do |dir|
-=======
         FileUtils.cd(Dir.pwd) do |dir|
->>>>>>> d6cd67bd5eb02a8f6bbfee3b92df63566f5f38e7
             %w(app app/controllers app/models app/views config public public/css public/images public/js db/migrate spec).each do |directory|
                 FileUtils.mkdir_p(directory)
             end
