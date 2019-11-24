@@ -13,7 +13,13 @@ class SinatrabaseFs::StructureMe
     end
 
     def make_dirs 
+<<<<<<< HEAD
+        curr_dir = Dir.pwd
+
+        FileUtils.cd(curr_dir) do |dir|
+=======
         FileUtils.cd(Dir.pwd) do |dir|
+>>>>>>> d6cd67bd5eb02a8f6bbfee3b92df63566f5f38e7
             %w(app app/controllers app/models app/views config public public/css public/images public/js db/migrate spec).each do |directory|
                 FileUtils.mkdir_p(directory)
             end
@@ -53,7 +59,7 @@ class SinatrabaseFs::StructureMe
     def write_to_config_environment_rb
         FileUtils.cd(Dir.pwd) do |dir|
             file = File.open("config/environment.rb", 'w')
-            file.puts "ENV['SINATRA_ENV'] ||= \"development\"\n\nrequire 'bundler/setup'\nBundler.require(:default, ENV['SINATRA_ENV'])\n\n# SET CONNECTION TO DATABASE\nconfigure :development do\n\tset :database, 'sqlite3:db/database.db'\nend\n\nrequire './app'"
+            file.puts "ENV['SINATRA_ENV'] ||= \"development\"\n\nrequire 'bundler/setup'\nBundler.require(:default, ENV['SINATRA_ENV'])\n\n# SET CONNECTION TO DATABASE\ndef fi_check_migration\n\tbegin\n\t\tActiveRecord::Migration.check_pending!\n\trescue ActiveRecord::PendingMigrationError\n\t\traise ActiveRecord::PendingMigrationError.new \"Migrations are pending.\nTo resolve this issue, run: \nrake db:migrate SINATRA_ENV=\#{ENV['SINATRA_ENV']}\"\n\tend\nend\n\nActiveRecord::Base.establish_connection(\n\t:adapter => \"sqlite3\",\n\t:database => \"db/\#{ENV['SINATRA_ENV']}.sqlite\"\n)\n\nrequire_all 'app'"
             file.close
         end
     end
@@ -61,7 +67,7 @@ class SinatrabaseFs::StructureMe
     def write_to_config_ru
         FileUtils.cd(Dir.pwd) do |dir|
             file = File.open("config.ru", 'w')
-            file.puts "require './config/environment'\n\nrun App # or whatever the app controller module/class name you want eg. Application"
+            file.puts "require './config/environment'\n\nbegin\n\tfi_check_migration\n\n\tuse Rack::MethodOverride\n\n\trun App # or whatever the app controller module/class name you want eg. ApplicationController\nrescue ActiveRecord::PendingMigrationError => err\n\tSTDERR.puts err\n\texit 1\nend"
             file.close
         end
     end
@@ -69,7 +75,7 @@ class SinatrabaseFs::StructureMe
     def write_to_gemfile 
         FileUtils.cd(Dir.pwd) do |dir|
             file = File.open("Gemfile", 'w')
-            file.puts "source 'https://rubygems.org'\n\ngem 'sinatra'\ngem 'thin'\ngem 'require_all'\ngem 'activerecord', '5.2'\ngem 'sinatra-activerecord'\ngem 'rake'\n\ngroup :development do\n\tgem 'shotgun'\n\tgem 'pry'\n\tgem 'tux'\n\tgem 'sqlite3', '~> 1.3.6'\nend"
+            file.puts "source 'https://rubygems.org'\n\ngem 'sinatra'\ngem 'thin'\ngem 'require_all'\ngem 'activerecord', '5.2'\ngem 'sinatra-activerecord'\ngem 'database_cleaner'\ngem 'rake'\n\ngroup :development do\n\tgem 'capybara'\n\tgem 'shotgun'\n\tgem 'pry'\n\tgem 'tux'\n\tgem 'sqlite3', '~> 1.3.6'\nend"
             file.close
         end
     end
